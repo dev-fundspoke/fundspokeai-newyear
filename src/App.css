@@ -1,0 +1,68 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.balance-card {
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.balance-card p {
+  font-size: 2.5rem;
+  margin: 0.5rem 0;
+}
+
+.positive {
+  color: #4caf50;
+}
+
+.negative {
+  color: #f44336;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.actions button {
+  flex: 1;
+  padding: 1rem;
+}
+
+.income-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.expense-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.transactions {
+  margin-top: 2rem;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+}
+
+.transaction.income {
+  border-left: 4px solid #4caf50;
+}
+
+.transaction.expense {
+  border-left: 4px solid #f44336;
+}

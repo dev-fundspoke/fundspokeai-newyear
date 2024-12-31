@@ -1,0 +1,5 @@
+export * from './AnalyticsIcon'
+export * from './DashboardIcon'
+export * from './MenuIcon'
+export * from './SettingsIcon'
+export * from './TransactionsIcon'

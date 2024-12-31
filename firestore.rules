@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isValidTimestamp(timestamp) {
+      return timestamp is timestamp && timestamp == request.time;
+    }
+    
+    function hasValidCompanyData(data) {
+      return data.companyName.en is string && data.companyName.en.size() > 0
+        && data.companyName.fr is string && data.companyName.fr.size() > 0
+        && data.corporationNumber is string && data.corporationNumber.size() > 0
+        && data.federalBusinessRegistryNumber is number && data.federalBusinessRegistryNumber > 0
+        && data.organizationType is string && data.organizationType.size() > 0
+        && data.sector is list && data.sector.size() > 0;
+    }
+
+    match /companies/{companyId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && isValidTimestamp(request.resource.data.createdAt)
+        && isValidTimestamp(request.resource.data.updatedAt)
+        && hasValidCompanyData(request.resource.data);
+      allow update: if isAuthenticated()
+        && isValidTimestamp(request.resource.data.updatedAt)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && hasValidCompanyData(request.resource.data);
+      allow delete: if false; // Disable deletion
+    }
+  }
+}
